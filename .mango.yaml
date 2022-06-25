@@ -1,0 +1,14 @@
+log:
+  level: warn
+
+serve:
+  port: 6666
+
+dgraph:
+  host: localhost
+  port: 9080
+  insecure: true
+  namespace: 
+  user:
+  pass:
+  cloudurl:

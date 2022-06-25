@@ -19,6 +19,9 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/vivek-yadav/mango/config"
+	"github.com/vivek-yadav/mango/server"
+	"github.com/vivek-yadav/mango/utils"
 )
 
 // serveCmd represents the serve command
@@ -33,6 +36,20 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("serve called")
+		fmt.Println(config.CurrentConfig.Show())
+		utils.MangoLog.Debug("Test Debug")
+		utils.MangoLog.Info("Test Info")
+		utils.MangoLog.Warn("Test Warn")
+		utils.MangoLog.Error("Test Error")
+		// defer func() {
+		// 	if err := recover(); err != nil {
+		// 		utils.MangoLog.Error("panic occurred:", err)
+		// 	}
+		// }()
+		// utils.CheckFatal(errors.New("Custom Error Check"))
+		// utils.MangoLog.Fatal("Test Fatal-Error")
+		server.Start(config.CurrentConfig)
+
 	},
 }
 

@@ -1,0 +1,8 @@
+GET http://localhost:6666/?test=true&customer=vivek
+Content-Type: application/json
+Host: mango.vivek-yadav.com
+
+{
+    "body":"test"
+}
+

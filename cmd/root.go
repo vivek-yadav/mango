@@ -17,10 +17,15 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/vivek-yadav/mango/config"
+	"github.com/vivek-yadav/mango/utils"
+	"github.com/vivek-yadav/mango/version"
 )
 
 var cfgFile string
@@ -82,11 +87,18 @@ func initConfig() {
 		viper.SetConfigType("yaml")
 		viper.SetConfigName(".mango")
 	}
-
+	viper.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
+	viper.SetEnvPrefix(strings.ToUpper(version.AppName()))
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
+
+	err := viper.Unmarshal(&config.CurrentConfig)
+	cobra.CheckErr(err)
+
+	utils.MangoLog.Setup(config.CurrentConfig.Log)
+	log.Println(utils.MangoLog.LogConfig.LogLevel.String())
 }
