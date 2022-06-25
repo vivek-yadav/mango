@@ -5,8 +5,8 @@ BINARY_NAME=mango
 VERSION=$(shell git describe --tags)
 BUILD=$(shell date +%FT%T%z)
 
-VERSION_LDFLAG=-X main.Version=${VERSION}
-BUILD_LDFLAG=-X main.Build=${BUILD}
+VERSION_LDFLAG=-X github.com/vivek-yadav/mango/version.VERSION=${VERSION}
+BUILD_LDFLAG=-X github.com/vivek-yadav/mango/version.BUILD=${BUILD}
 
 LDFLAGS=-ldflags "-w -s ${VERSION_LDFLAG} ${BUILD_LDFLAG}"
 
