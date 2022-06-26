@@ -99,6 +99,6 @@ func initConfig() {
 	err := viper.Unmarshal(&config.CurrentConfig)
 	cobra.CheckErr(err)
 
-	utils.MangoLog.Setup(config.CurrentConfig.Log)
-	log.Println(utils.MangoLog.LogConfig.LogLevel.String())
+	utils.MangoLog.Setup(&(config.CurrentConfig.Log))
+	log.Println("Log Level:", config.CurrentConfig.Log.LogLevel.String())
 }

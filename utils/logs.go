@@ -24,7 +24,7 @@ type MangoLogger struct {
 
 var MangoLog MangoLogger
 
-func (ml *MangoLogger) Setup(conf LogConfig) {
+func (ml *MangoLogger) Setup(conf *LogConfig) {
 	file := os.Stdout
 	errFile := os.Stderr
 	var err error
@@ -37,7 +37,7 @@ func (ml *MangoLogger) Setup(conf LogConfig) {
 	conf.LogLevel = logLevelParse(conf.Level)
 	flags := log.LstdFlags | log.LUTC | log.Llongfile | log.Lmsgprefix
 
-	ml.LogConfig = &conf
+	ml.LogConfig = conf
 
 	ml.LogDebug = log.New(file, strings.ToUpper(LogLevelDebug.String())+": ", flags)
 	ml.LogInfo = log.New(file, strings.ToUpper(LogLevelInfo.String())+": ", flags)

@@ -2,7 +2,7 @@ log:
   level: warn
 
 serve:
-  port: 6666
+  port: 8080
 
 dgraph:
   host: localhost
